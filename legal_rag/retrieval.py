@@ -10,10 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-# -------------------------
 # Agent State
-# -------------------------
 class AgentState(TypedDict):
     query: str
     intermediate_steps: Annotated[List[Any], operator.add]
@@ -22,9 +19,7 @@ class AgentState(TypedDict):
     final_analysis: str
 
 
-# -------------------------
 # FAISS Legal DB Tool
-# -------------------------
 @tool
 def legal_database_search(query: str) -> str:
     """
@@ -48,9 +43,7 @@ def legal_database_search(query: str) -> str:
         return f"Error during legal database search: {e}"
 
 
-# -------------------------
 # Research Function
-# -------------------------
 def perform_research(state: AgentState) -> dict:
     """Performs both FAISS and web searches in parallel."""
     print("---PERFORMING RESEARCH---")
