@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 class AgentState(TypedDict):
     query: str
     intermediate_steps: Annotated[List[Any], operator.add]
