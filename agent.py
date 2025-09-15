@@ -25,7 +25,6 @@ if not TAVILY_API_KEY or not GROK_API_KEY:
     )
     st.stop()
 
-
 # --- State Management with LangGraph ---
 class AgentState(TypedDict):
     query: str
