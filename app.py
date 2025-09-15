@@ -83,7 +83,7 @@ if user_input:
         try:
             CONFIG = {"configurable": {"thread_id": st.session_state["thread_id"]}}
 
-            # ✅ Use app.invoke() instead of app.execute()
+            # Use app.invoke() instead of app.execute()
             result = app.invoke(
                 {
                     "query": user_input,
