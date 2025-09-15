@@ -1,6 +1,6 @@
 import os
 import json
-import fitz  # type: ignore # PyMuPDF
+import fitz  
 
 
 def convert_pdfs_to_txt(source_dir: str, dest_dir: str):
