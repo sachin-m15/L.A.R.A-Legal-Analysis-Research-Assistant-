@@ -9,17 +9,14 @@ from langchain_core.messages import BaseMessage  # noqa: F401
 
 load_dotenv()
 
-# ------------------------------
 # Config
-# ------------------------------
-FAST_MODE = True  # ✅ Toggle True = faster (trims), False = detailed chunking
+
+FAST_MODE = True  # Toggle True = faster (trims), False = detailed chunking
 CHUNK_SIZE = 1200
 MAX_CHUNKS = 3
 
 
-# ------------------------------
 # Agent State
-# ------------------------------
 class AgentState(TypedDict):
     query: str
     intermediate_steps: Annotated[List[Any], operator.add]
@@ -30,9 +27,7 @@ class AgentState(TypedDict):
     chat_history: List[BaseMessage]
 
 
-# ------------------------------
 # Utility Functions
-# ------------------------------
 def get_llm():
     """Initialize Groq LLM with env key."""
     groq_api_key = os.getenv("GROQ_API_KEY")
@@ -68,7 +63,7 @@ def summarize_long_text(text: str, label: str, query: str) -> str:
 
     llm = get_llm()
 
-    # ✅ Fast mode: just trim input
+    # Fast mode: just trim input
     if FAST_MODE:
         trimmed = " ".join(text.split()[:2000])
         prompt = PromptTemplate(
@@ -82,7 +77,7 @@ def summarize_long_text(text: str, label: str, query: str) -> str:
         )
         return safe_invoke(llm, prompt, {"query": query, "text": trimmed})
 
-    # ✅ Detailed mode: chunk + merge
+    # Detailed mode: chunk + merge
     chunk_summaries = []
     for chunk in chunk_text(text):
         prompt = PromptTemplate(
@@ -114,9 +109,7 @@ def summarize_long_text(text: str, label: str, query: str) -> str:
     )
 
 
-# ------------------------------
 # Core Functions
-# ------------------------------
 def summarize_and_reflect(state: AgentState) -> dict:
     """Summarizes the findings and reflects on the research to identify gaps."""
     print("---SUMMARIZING & REFLECTING---")
