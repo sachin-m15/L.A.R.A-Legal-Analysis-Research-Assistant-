@@ -5,7 +5,7 @@ from typing import TypedDict, Annotated, List, Any
 import operator
 from langchain_core.messages import BaseMessage
 from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.memory import MemorySaver  # ✅ use memory saver
+from langgraph.checkpoint.memory import MemorySaver  
 
 # Import the refactored functions from the legal_rag directory
 from legal_rag.query_rewriter import rewrite_query
@@ -66,7 +66,7 @@ workflow.add_conditional_edges(
 )
 workflow.add_edge("final_analysis", END)
 
-# ✅ Use in-memory checkpointing
+# Use in-memory checkpointing
 checkpointer = MemorySaver()
 
 # Compile the graph
